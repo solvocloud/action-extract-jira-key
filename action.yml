@@ -1,0 +1,28 @@
+name: extract-jira-key
+description: Extracts a JIRA issue key from a string
+inputs:
+  input:
+    description: The input string
+    required: true
+  group:
+    description: Regex group number to return
+    required: true
+    default: "2"
+  regex:
+    # Bare format of issue key: [A-Z]{1,10}-[0-9]+
+    description: Regular expression to match against
+    required: true
+    default: "(feature/|bugfix/)?([A-Z]{1,10}-[0-9]+)"
+outputs:
+  issue-key:
+    description: The extracted issue key
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - "--input"
+    - ${{ inputs.input }}
+    - "--group"
+    - ${{ inputs.group }}
+    - "--regex"
+    - ${{ inputs.regex }}
