@@ -18,7 +18,7 @@ outputs:
     description: The extracted issue key
 runs:
   using: docker
-  image: Dockerfile
+  image: docker://ghcr.io/solvocloud/action-extract-jira-key:1.1
   args:
     - "--input"
     - ${{ inputs.input }}
