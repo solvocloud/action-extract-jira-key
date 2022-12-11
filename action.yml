@@ -13,12 +13,16 @@ inputs:
     description: Regular expression to match against
     required: true
     default: "(feature/|bugfix/)?([A-Z]{1,10}-[0-9]+)"
+  ignore:
+    description: Regular expression of patterns to completely ignore
+    required: false
+    default: "(dependabot/|revert\-)(.*)"
 outputs:
   issue-key:
     description: The extracted issue key
 runs:
   using: docker
-  image: docker://ghcr.io/solvocloud/action-extract-jira-key:1.1
+  image: docker://ghcr.io/solvocloud/action-extract-jira-key:1.2
   args:
     - "--input"
     - ${{ inputs.input }}
@@ -26,3 +30,5 @@ runs:
     - ${{ inputs.group }}
     - "--regex"
     - ${{ inputs.regex }}
+    - "--ignore"
+    - ${{ inputs.ignore }}
