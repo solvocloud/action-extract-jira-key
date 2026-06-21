@@ -12,7 +12,7 @@ def main():
     group = args.group
     regex = args.regex
 
-    result = re.match(regex, input)
+    result = re.search(regex, input)
     if result is None:
         raise Exception(f"Failed extracting issue key from string: {input}")
 
